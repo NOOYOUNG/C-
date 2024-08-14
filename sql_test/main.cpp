@@ -9,21 +9,21 @@ int main() {
 	MYSQL* CnQuery;
 
 	MYSQL_RES* result;
-	//MYSQL_RES* mysql_store_result(MYSQL* mysql); mysql_query·Î ½ÇÇàÇÑ Äõ¸® Result Set ÀúÀå
+	//MYSQL_RES* mysql_store_result(MYSQL* mysql); mysql_queryë¡œ ì‹¤í–‰í•œ ì¿¼ë¦¬ Result Set ì €ì¥
 	MYSQL_ROW row;
-	//MYSQL_ROW mysql_fetch_row(MYSQL_RES* result); Result Set¿¡¼­ ÇÏ³ªÀÇ row¸¦ ¹è¿­·Î °¡Á®¿È
+	//MYSQL_ROW mysql_fetch_row(MYSQL_RES* result); Result Setì—ì„œ í•˜ë‚˜ì˜ rowë¥¼ ë°°ì—´ë¡œ ê°€ì ¸ì˜´
 
-	mysql_init(&mysql); // mysql ±¸Á¶Ã¼ ÃÊ±âÈ­
+	mysql_init(&mysql); // mysql êµ¬ì¡°ì²´ ì´ˆê¸°í™”
 	
-	if (!mysql_real_connect(&mysql, "localhost", "root", "root", "example", 3306, NULL, 0)) { //¿¬°á ½ÇÆĞ½Ã
+	if (!mysql_real_connect(&mysql, "localhost", "", "", "example", 3306, NULL, 0)) { //ì—°ê²° ì‹¤íŒ¨ì‹œ
 		cerr << "Failed connect Mysql"<<endl;
 		return 0;
 	}
 
-	//insert¹®
-	mysql_set_character_set(&mysql, "utf8mb4"); // ÇÑ±Û ÀÎ½Ä
+	//insertë¬¸
+	mysql_set_character_set(&mysql, "utf8mb4"); // í•œê¸€ ì¸ì‹
 	
-	string name = u8"±è°­¾ÆÁö";
+	string name = u8"ê¹€ê°•ì•„ì§€";
 	int age = 5;
 
 	string insert_query
@@ -35,11 +35,11 @@ int main() {
 	}
 
 	cout << "Add Date Success" << endl;
-	mysql_close(&mysql); // mysql ¼­¹ö¿Í disconnect
+	mysql_close(&mysql); // mysql ì„œë²„ì™€ disconnect
 
 
 	
-	/* //select¹®
+	/* //selectë¬¸
 	mysql_query(&mysql, "set session character_set_connection=euckr;");
 	mysql_query(&mysql, "set session character_set_results=euckr;");
 	mysql_query(&mysql, "set session character_set_client=euckr;");
@@ -57,7 +57,7 @@ int main() {
 		return 0;
 	}
 
-	int num_fields = mysql_num_fields(result); // ÀüÃ¼ ¿­ÀÇ °³¼ö °¡Á®¿È
+	int num_fields = mysql_num_fields(result); // ì „ì²´ ì—´ì˜ ê°œìˆ˜ ê°€ì ¸ì˜´
 	while ((row = mysql_fetch_row(result))) {
 		for (int i = 0; i < num_fields; i++) {
 			cout << (row[i] ? row[i] : "NULL") << " ";
@@ -65,12 +65,12 @@ int main() {
 		cout << endl;
 	}
 
-	mysql_free_result(result); // Result Set Á¦°Å
+	mysql_free_result(result); // Result Set ì œê±°
 	mysql_close(&mysql);
 	*/
 
 
-	/* //delete¹®
+	/* //deleteë¬¸
 	string delete_query = "DELETE FROM test WHERE age=20";
 
 	if (mysql_query(&mysql, delete_query.c_str())) {
@@ -78,10 +78,10 @@ int main() {
 		return 0;
 	}
 
-	cout << "»èÁ¦ ¼º°ø" << endl;
+	cout << "ì‚­ì œ ì„±ê³µ" << endl;
 	
-	unsigned long affectedRow = mysql_affected_rows(&mysql); // »èÁ¦µÈ ÇàÀÇ °³¼ö
-	cout << "»èÁ¦µÈ ÇàÀº " << affectedRow << "°³" << endl;
+	unsigned long affectedRow = mysql_affected_rows(&mysql); // ì‚­ì œëœ í–‰ì˜ ê°œìˆ˜
+	cout << "ì‚­ì œëœ í–‰ì€ " << affectedRow << "ê°œ" << endl;
 
 	mysql_close(&mysql);
 	*/
